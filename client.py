@@ -22,7 +22,6 @@ def pad_md5(l):
 data = {
     'method': 'vimeo.test.login',
     'api_key': raw_input("api_key: "),
-    'api_sig': raw_input("api_sig: "),
 }
 
 flattened_req = flatten(data)
@@ -35,7 +34,7 @@ data[flattened_req[0]] = flattened_req[1:]
 data['video_id'] = '1337'
 data['favorite'] = '1'
 data['method'] = 'vimeo.videos.setFavorite'
-data['api_sig'] = md5.MD5(data['api_sig']+flatten(data))
+data['api_sig'] = md5.MD5(raw_input("api_sig: ")+flatten(data))
 
 print data
 
