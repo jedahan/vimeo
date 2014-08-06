@@ -21,7 +21,7 @@ def pad_md5(l):
 
 old_data = {
     'method': 'vimeo.test.login',
-    'api_key': raw_input("api_key: "),
+    'api_key': raw_input("api_key: ")
 }
 
 flattened_old = flatten(old_data)
@@ -35,13 +35,13 @@ new_data = {
   'video_id': '1337',
   'favorite': '1',
   'method': 'vimeo.videos.setFavorite',
-  flattened_old[0]: flattened_old[1:]
 }
 
 api_sig = raw_input("api_sig: ")
 
 flattened_new = flatten(new_data)
-flattened_new += pad_md5(old_length + len(old_padding) + len(flattened_new))
+new_length = len(flattened_new)
+flattened_new += pad_md5(old_length + len(old_padding) + new_length)
 
 from md5 import MD5
 md5 = MD5('')
@@ -50,6 +50,7 @@ while len(flattened_new):
     md5._handle(flattened_new[:64])
     flattened_new = flattened_new[64:]
 
+new_data[flattened_old[0]] = flattened_old[1:]
 new_data['api_sig'] = md5.hexdigest()
 
 print new_data
